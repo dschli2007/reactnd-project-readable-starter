@@ -41,7 +41,7 @@ class Login extends React.Component {
     }
 
     return (
-      <div>
+      <div className="login-container">
         Please{' '}
         <button className="login-button" onClick={() => this.setModalState(true)}>
           login

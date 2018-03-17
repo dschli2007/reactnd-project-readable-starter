@@ -2,7 +2,7 @@ import { LOAD_POSTS, ADD_POST, EDIT_POST, REMOVE_POST } from './actions'
 
 const initialState = {
   items: [],
-  loaded: false
+  ready: false
 }
 
 function post(state = initialState, action) {
@@ -11,7 +11,7 @@ function post(state = initialState, action) {
       return {
         ...state,
         items: action.items,
-        loaded: true
+        ready: true
       }
 
     case ADD_POST:

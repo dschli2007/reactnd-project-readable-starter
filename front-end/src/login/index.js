@@ -28,11 +28,12 @@ class Login extends React.Component {
   }
 
   render() {
-    const { userName } = this.props
-    if (userName) {
+    const { name, isLogged } = this.props.user
+
+    if (isLogged) {
       return (
         <div className="login-container">
-          Welcome {userName},{' '}
+          Welcome {name},{' '}
           <button className="login-button" onClick={() => this.logoutClick()}>
             Logout
           </button>
@@ -55,13 +56,13 @@ class Login extends React.Component {
   }
 }
 
-function mapStateToProps({ login }) {
-  return { userName: login.userName }
+function mapStateToProps({ user }) {
+  return { user }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    login: (userName) => dispatch(userLogIn(userName)),
+    login: (data) => dispatch(userLogIn(data)),
     logout: () => dispatch(userLogOut())
   }
 }

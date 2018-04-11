@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 import logo from './logo.svg'
 import './App.css'
 import Login from './login'
@@ -12,7 +12,9 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Readable</h1>
+          <Link to="/">
+            <h1 className="App-title">Readable</h1>
+          </Link>
           <Login />
         </header>
 
@@ -22,7 +24,5 @@ class App extends Component {
     )
   }
 }
-
-
 
 export default App

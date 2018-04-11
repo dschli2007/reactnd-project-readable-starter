@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
 import PostStub from '../post-stub'
+import Filter from '../filter'
 
 class PostList extends React.Component {
   PropTypes = {
@@ -11,11 +12,11 @@ class PostList extends React.Component {
   }
 
   render() {
-    const { posts, ready } = this.props
+    const { posts, isReady } = this.props
     return (
       <div>
-        <h2>I am a container</h2>
-        {ready && (
+        <Filter />
+        {isReady && (
           <ul>
             {posts.map((post) => (
               <li key={post.id}>
@@ -26,7 +27,7 @@ class PostList extends React.Component {
             ))}
           </ul>
         )}
-        {!ready && <p> I am not ready </p>}
+        {!isReady && <p> Loading...</p>}
       </div>
     )
   }
@@ -35,7 +36,7 @@ class PostList extends React.Component {
 function mapStateToProps(state) {
   return {
     posts: state.post.items,
-    ready: state.post.ready
+    isReady: state.post.isReady
   }
 }
 

@@ -1,8 +1,9 @@
-import { LOAD_POSTS, ADD_POST, EDIT_POST, REMOVE_POST } from './actions'
+import { LOAD_POSTS } from '../post-list/actions'
+import { ADD_POST, EDIT_POST, REMOVE_POST } from '../post-view/actions'
 
 const initialState = {
   items: [],
-  ready: false
+  isReady: false
 }
 
 function post(state = initialState, action) {
@@ -11,7 +12,7 @@ function post(state = initialState, action) {
       return {
         ...state,
         items: action.items,
-        ready: true
+        isReady: true
       }
 
     case ADD_POST:

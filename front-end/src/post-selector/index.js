@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Post from '../post'
+import PostView from '../post-view'
 
 function PostSelector(props) {
   const postId = props.match.params.id
   const post = props.posts.find((p) => p.id === postId)
   if (post) {
-    return <Post post={post} />
+    return <PostView post={post} />
   }
   return <p>Sorry! It seems the post you are looking for has been deleted!</p>
 }

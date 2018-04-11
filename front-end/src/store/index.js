@@ -1,13 +1,19 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { combineReducers } from 'redux'
 import thunk from 'redux-thunk'
-import login from '../login/reducer'
-import post from '../post/reducer'
+import user from '../reducers/user'
+import post from '../reducers/post'
+import comment from '../reducers/comment'
+import category from '../reducers/category'
+import filter from '../reducers/filter'
 
 function reducers() {
   return combineReducers({
-    login,
-    post
+    user,
+    post,
+    comment,
+    category,
+    filter
   })
 }
 
@@ -15,9 +21,9 @@ function getStore() {
   return createStore(
     reducers(),
     compose(
-    applyMiddleware(thunk),
-       window.__REDUX_DEVTOOLS_EXTENSION__?
-        window.__REDUX_DEVTOOLS_EXTENSION__(): f=>f)
+      applyMiddleware(thunk),
+      window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    )
   )
 }
 

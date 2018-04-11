@@ -8,6 +8,14 @@ function ServerAPI(url = 'http://localhost:3001') {
         headers: { Authorization: 'readable-cli' },
         method: 'GET'
       })
+    },
+
+    getCategories() {
+      const targetUrl = `${url}/categories`
+      return fetch(targetUrl, {
+        headers: { Authorization: 'readable-cli' },
+        method: 'GET'
+      })
     }
   }
 }

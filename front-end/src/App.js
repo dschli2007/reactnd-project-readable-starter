@@ -20,6 +20,7 @@ class App extends Component {
 
         <Route exact path="/" component={PostList} />
         <Route path="/view/:id" component={PostSelector} />
+        <div>Created by Dirceu Schlickmann</div>
       </div>
     )
   }

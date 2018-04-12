@@ -1,26 +1,36 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import PostStub from '../post-stub'
 import Filter from '../filter'
 
 class PostList extends React.Component {
   PropTypes = {
     posts: PropTypes.array.isRequired,
-    ready: PropTypes.bool.isRequired
+    ready: PropTypes.bool.isRequired,
+    filter: PropTypes.object.isRequired
+  }
+
+  getPosts = () => {
+    const { posts, filter } = this.props
+    let result = posts
+    if (filter.category !== 'All')
+      result = result.filter((item) => item.category === filter.category)
+    if (filter.text) result = result.filter((item) => item.title.includes(filter.text))
+    return result
   }
 
   render() {
-    const { posts, isReady } = this.props
+    const { isReady } = this.props
     return (
       <div>
         <Filter />
         {isReady && (
           <ul>
-            {posts.map((post) => (
+            {this.getPosts().map((post) => (
               <li key={post.id}>
-                <Link to={"/view/"+post.id}>
+                <Link to={'/view/' + post.id}>
                   <PostStub post={post} />
                 </Link>
               </li>
@@ -36,7 +46,8 @@ class PostList extends React.Component {
 function mapStateToProps(state) {
   return {
     posts: state.post.items,
-    isReady: state.post.isReady
+    isReady: state.post.isReady,
+    filter: state.filter
   }
 }
 

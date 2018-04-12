@@ -1,13 +1,10 @@
 import React from 'react'
 
 class PostView extends React.Component {
-  constructor(props) {
-    super(props)
-  }
 
   render() {
     const {post} = this.props
-    console.log(post)
+  //  console.log(post)
     return(
 
 <article>

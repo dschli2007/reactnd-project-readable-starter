@@ -1,14 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { setFilterText, setFilterCategory } from './actions'
+import { Link } from 'react-router-dom'
+import { setFilterText, setFilterCategory, setSortBy } from './actions'
+import Sort from '../utils/sort'
 
 class Filter extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { category: 'All', text: '' }
-  }
-
   PropTypes: {
     categories: PropTypes.array
   }
@@ -21,10 +18,14 @@ class Filter extends React.Component {
     this.props.setText(newText)
   }
 
-  render() {
-    const { categories, category } = this.props
+  handleClickSort = (sortBy) => {
+    this.props.setSortBy(sortBy)
+  }
 
-    return (
+  render() {
+    const { categories, category, sortBy } = this.props
+    console.log(this.props)
+        return (
       <div className="filter-container">
         <input
           type="text"
@@ -33,7 +34,7 @@ class Filter extends React.Component {
           value={this.props.text}
         />
         <div>
-          Show:
+          Category:
           {categories &&
             categories.map((item) => (
               <button
@@ -43,6 +44,23 @@ class Filter extends React.Component {
                 {item}
               </button>
             ))}
+          {categories &&
+            categories.map((item) => (
+              <Link key={item} to={'/' + (item === 'All' ? '' : item)}>
+                <button disabled={category === item}>{item}</button>
+              </Link>
+            ))}
+        </div>
+        <div>
+          Sort by:
+          {Sort.types.map((item) => (
+            <button
+              key={item.id}
+              disabled={sortBy === item.id}
+              onClick={() => this.handleClickSort(item.id)}>
+              {item.name}
+            </button>
+          ))}
         </div>
       </div>
     )
@@ -56,14 +74,16 @@ function mapStateToProps(state) {
   return {
     categories: names,
     category: state.filter.category,
-    text: state.filter.text
+    text: state.filter.text,
+    sortBy: state.filter.sortBy
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     setCategory: (name) => dispatch(setFilterCategory({ category: name })),
-    setText: (text) => dispatch(setFilterText({ text }))
+    setText: (text) => dispatch(setFilterText({ text })),
+    setSortBy: (sortBy) => dispatch(setSortBy({ sortBy }))
   }
 }
 

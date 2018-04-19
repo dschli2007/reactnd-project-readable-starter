@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 class PostStub extends React.Component {
   PropTypes = {
@@ -10,9 +11,18 @@ class PostStub extends React.Component {
     const { post } = this.props
     return (
       <div>
-        <h2>{post.title}</h2>
-        <p>{post.body}</p>
-        <p>{post.category}</p>
+        <Link to={`${post.category}/${post.id}`}>
+          <h2>
+            {post.title} - {post.category}
+          </h2>
+          <p>{post.author}</p>
+          <p>Comments: {post.commentCount}</p>
+          <p>Score: {post.voteScore}</p>
+        </Link>
+        <button>Up Vote</button>
+        <button>Down Vote</button>
+        <button>Edit</button>
+        <button>Delete</button>
       </div>
     )
   }

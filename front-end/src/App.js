@@ -19,7 +19,8 @@ class App extends Component {
         </header>
 
         <Route exact path="/" component={PostList} />
-        <Route path="/view/:id" component={PostSelector} />
+        <Route exact path="/:category" component={PostList} />
+        <Route path="/:category/:id" component={PostSelector} />
         <div>Created by Dirceu Schlickmann</div>
       </div>
     )

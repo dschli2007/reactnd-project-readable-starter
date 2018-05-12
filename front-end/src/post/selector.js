@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import PostView from '../post-view'
+import PostView from './view'
 
 function PostSelector(props) {
   const postId = props.match.params.id

@@ -1,4 +1,4 @@
-import { USER_LOG_IN, USER_LOG_OUT } from '../login/actions'
+import { USER_LOG_IN, USER_LOG_OUT } from '../actions'
 
 const initialState = {
   name: '',

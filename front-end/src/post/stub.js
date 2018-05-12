@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import PostCommands from './commands'
 
 class PostStub extends React.Component {
   PropTypes = {
@@ -8,7 +10,7 @@ class PostStub extends React.Component {
   }
 
   render() {
-    const { post } = this.props
+    const  {post}  = this.props
     return (
       <div>
         <Link to={`${post.category}/${post.id}`}>
@@ -19,13 +21,15 @@ class PostStub extends React.Component {
           <p>Comments: {post.commentCount}</p>
           <p>Score: {post.voteScore}</p>
         </Link>
-        <button>Up Vote</button>
-        <button>Down Vote</button>
-        <button>Edit</button>
-        <button>Delete</button>
+        <PostCommands post={post} />
+
       </div>
     )
   }
 }
 
-export default PostStub
+function mapStateToProps(state) {
+  return { posts: state.post.items }
+}
+
+export default connect(mapStateToProps)(PostStub)

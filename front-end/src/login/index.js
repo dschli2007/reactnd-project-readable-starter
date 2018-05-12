@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { userLogIn, userLogOut } from './actions'
-import LoginModal from '../login-modal'
+import { userLogIn, userLogOut } from '../actions'
+import LoginModal from './modal'
 
 class Login extends React.Component {
   constructor(props) {

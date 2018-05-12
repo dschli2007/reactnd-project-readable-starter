@@ -1,4 +1,4 @@
-import { LOAD_COMMENTS} from '../comment/actions'
+import { LOAD_COMMENTS} from '../actions'
 const initialState = {
   items: [],
   isReady: false

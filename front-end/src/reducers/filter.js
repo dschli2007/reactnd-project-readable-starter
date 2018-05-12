@@ -1,4 +1,4 @@
-import { SET_FILTER_TEXT, SET_FILTER_CATEGORY, SET_FILTER_SORTBY } from '../filter/actions'
+import { SET_FILTER_TEXT, SET_FILTER_SORTBY } from '../actions'
 
 const initialState = {
   text: '',
@@ -12,12 +12,6 @@ function filter(state = initialState, action) {
       return {
         ...state,
         text: action.text
-      }
-
-    case SET_FILTER_CATEGORY:
-      return {
-        ...state,
-        category: action.category
       }
 
     case SET_FILTER_SORTBY:

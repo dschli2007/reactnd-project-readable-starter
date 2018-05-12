@@ -17,8 +17,8 @@ const Sort = {
       return 0
     },
     score: (a, b) => {
-      if (a.voteScore > b.voteScore) return 1
-      if (a.voteScore < b.voteScore) return -1
+      if (a.voteScore > b.voteScore) return -1
+      if (a.voteScore < b.voteScore) return 1
       return 0
     }
   },

@@ -3,8 +3,9 @@ import { Route, Link } from 'react-router-dom'
 import logo from './logo.svg'
 import './App.css'
 import Login from './login'
-import PostList from './post-list'
-import PostSelector from './post-selector'
+import PostList from './post/list'
+import PostSelector from './post/selector'
+import PostEditor from './post/editor'
 
 class App extends Component {
   render() {
@@ -17,11 +18,10 @@ class App extends Component {
           </Link>
           <Login />
         </header>
-
+        <PostEditor />
         <Route exact path="/" component={PostList} />
         <Route exact path="/:category" component={PostList} />
         <Route path="/:category/:id" component={PostSelector} />
-        <div>Created by Dirceu Schlickmann</div>
       </div>
     )
   }

@@ -1,8 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
-import PostStub from '../post-stub'
+import PostStub from './stub'
 import Filter from '../filter'
 import Sort from '../utils/sort'
 
@@ -29,17 +28,21 @@ class PostList extends React.Component {
 
   render() {
     const { isReady } = this.props
+    //console.log(new Date())
     return (
       <div>
-        <Filter posi={this.props.match.params.category} />
+        <Filter category={this.props.match.params.category || 'All'} />
         {isReady && (
-          <ul>
-            {this.getPosts().map((post) => (
-              <li key={post.id}>
-                <PostStub post={post} />
-              </li>
-            ))}
-          </ul>
+          <div>
+            <ul>
+              {this.getPosts().map((post) => (
+                <li key={post.id}>
+                  <PostStub post={post} />
+                </li>
+              ))}
+            </ul>
+            <button>Add post</button>
+          </div>
         )}
         {!isReady && <p> Loading...</p>}
       </div>
@@ -48,10 +51,12 @@ class PostList extends React.Component {
 }
 
 function mapStateToProps(state) {
+
   return {
     posts: state.post.items,
     isReady: state.post.isReady,
-    filter: state.filter
+    filter: state.filter,
+    version: state.post.version
   }
 }
 

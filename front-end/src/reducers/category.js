@@ -1,4 +1,4 @@
-import { LOAD_CATEGORIES } from '../category/actions'
+import { LOAD_CATEGORIES } from '../actions'
 
 const initialState = {
   items: [],

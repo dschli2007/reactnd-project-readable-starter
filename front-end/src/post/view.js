@@ -1,15 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 import PostCommands from './commands'
 import CommentList from '../comment/list'
 import Breadcrumb from '../breadcrumb'
+import { DateFormat } from '../utils/dateformat'
 
 class PostView extends React.Component {
   render() {
     const { post } = this.props
-
+    const scoreColor = post.voteScore === 0 ? '' : post.voteScore > 0 ? 'blue' : 'red'
+    let i = 0
     return (
       <div>
         <Breadcrumb post={post} />
@@ -19,17 +20,26 @@ class PostView extends React.Component {
             <h2>{post.title}</h2>
           </header>
           <main>
-            {post.body}
-            Comments: {post.commentCount}
-            Score: {post.voteScore}
+            <p>
+              {post.body.split('\n').map((item) => (
+                <span key={i + 1}>
+                  {item}
+                  <br />
+                </span>
+              ))}
+            </p>
+            <div className="post-list-author">
+              Writed by {post.author} in {DateFormat.day(post.timestamp)}
+            </div>
+            <div className="post-list-comments">Comments: {post.commentCount}</div>
+            <div className="post-list-score">
+              Score: <span className={scoreColor}>&nbsp;{post.voteScore}&nbsp; </span>
+            </div>
+
             <PostCommands post={post} />
             <CommentList post={post} />
           </main>
-          <footer>
-            <p>
-              Writed by {post.author} in {new Date(post.timestamp).toString()}
-            </p>
-          </footer>
+          <footer />
         </article>
       </div>
     )

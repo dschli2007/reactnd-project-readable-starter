@@ -144,7 +144,7 @@ export const votePostDown = ({ id }) => (dispatch) => {
 }
 
 export const addComment = ({ id, postId, body, author }) => (dispatch) => {
-  const data = { id, parentId: postId, body, author }
+  const data = { id, parentId: postId, body, author, timestamp: new Date() }
   return server
     .addComment(data)
     .then((res) => res.json())
@@ -168,21 +168,24 @@ export const updateComment = ({ comment }) => (dispatch) => {
     )
 }
 
-export const deleteComment = ({ id }) => (dispatch) => {
-  return server.deleteComment(id)
-  .then(() =>
+export const deleteComment = ({ id, postId }) => (dispatch) => {
+  return server.deleteComment(id).then(() =>
     dispatch({
       type: DELETE_COMMENT,
-      id
+      id,
+      postId
     })
   )
 }
 
 export const voteComment = ({ id, option }) => (dispatch) => {
-  return server.voteComment(id, option)
-  .then((res) => res.json())
-  .then((resComment) =>
-    dispatch({
-      type: UPDATE_COMMENT,
-      comment: resComment
-    }))}
+  return server
+    .voteComment(id, option)
+    .then((res) => res.json())
+    .then((resComment) =>
+      dispatch({
+        type: UPDATE_COMMENT,
+        comment: resComment
+      })
+    )
+}

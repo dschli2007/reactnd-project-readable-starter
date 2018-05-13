@@ -69,6 +69,7 @@ class PostEditor extends React.Component {
           <div className="field-group">
             <div className="field-label">Category:</div>
             <select
+                className="field-input"
               value={this.state.category}
               onChange={(e) => this.inputChanged('category', e.target.value)}>
               {categories.map((c) => (

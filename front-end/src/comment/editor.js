@@ -19,7 +19,6 @@ class CommentEditor extends React.Component {
   }
 
   render() {
-    const { post, comment } = this.props
 
     return (
       <div>
@@ -33,16 +32,16 @@ class CommentEditor extends React.Component {
             onChange={(e) => this.onCommentChange(e.target.value)}
           />
         </div>
-        <div>
-          <button onClick={() => this.saveComment()}>Save</button>
-          <button onClick={() => this.props.onEndEdit()}>Cancel</button>
+        <div className="button-group">
+          <button className="button green" onClick={() => this.saveComment()}>Save</button>
+          <button className="button black" onClick={() => this.props.onEndEdit()}>Cancel</button>
         </div>
       </div>
     )
   }
 }
 
-function mapStateToProps({}) {
+function mapStateToProps() {
   return {}
 }
 

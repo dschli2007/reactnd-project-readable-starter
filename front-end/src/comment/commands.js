@@ -4,8 +4,7 @@ import { deleteComment, voteComment, requireReloadPost } from '../actions'
 
 class CommentCommands extends React.Component {
   deleteClick() {
-    this.props.deleteComment(this.props.comment.id)
-    this.props.requireReloadPost(this.props.post.id)
+    this.props.deleteComment(this.props.comment.id, this.props.post.id)
   }
 
   render() {
@@ -13,12 +12,24 @@ class CommentCommands extends React.Component {
     const itIsMyPost = user.name === comment.author
     return (
       <div>
-        <button className="button green" onClick={() => this.props.voteComment(this.props.comment.id, 'upVote')}>Up vote</button>
-        <button className="button yellow" onClick={() => this.props.voteComment(this.props.comment.id, 'downVote')}>Down vote</button>
+        <button
+          className="button green"
+          onClick={() => this.props.voteComment(this.props.comment.id, 'upVote')}>
+          Up vote
+        </button>
+        <button
+          className="button yellow"
+          onClick={() => this.props.voteComment(this.props.comment.id, 'downVote')}>
+          Down vote
+        </button>
         {itIsMyPost && (
           <span>
-            <button className="button blue" onClick={() => this.props.onEdit()}>Edit</button>
-            <button className="button red" onClick={() => this.deleteClick()}>Delete</button>
+            <button className="button blue" onClick={() => this.props.onEdit()}>
+              Edit
+            </button>
+            <button className="button red" onClick={() => this.deleteClick()}>
+              Delete
+            </button>
           </span>
         )}
       </div>
@@ -32,13 +43,8 @@ function mapStateToProps({ user }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    deleteComment: (id) => dispatch(deleteComment({ id })),
+    deleteComment: (id, postId) => dispatch(deleteComment({ id, postId })),
     voteComment: (id, option) => dispatch(voteComment({ id, option })),
-    /*  votePostUp: (id) => dispatch(votePostUp({ id })),
-    votePostDown: (id) => dispatch(votePostDown({ id })),
-    startEditingPost: (post) => dispatch(startEditingPost(post)),
-    deletePost: (id) => dispatch(deletePost({ id }))
-  */
     requireReloadPost: (postId) => dispatch(requireReloadPost({ postId }))
   }
 }

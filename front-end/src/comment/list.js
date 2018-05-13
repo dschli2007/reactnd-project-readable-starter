@@ -12,12 +12,7 @@ class CommentList extends React.Component {
   componentDidMount() {
     if (this.props.post) this.props.loadCommentsForPost(this.props.post)
   }
-  /*
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.post && nextProps.comment && nextProps.post.id !== nextProps.comment.postId)
-      this.props.loadCommentsForPost(this.props.post)
-  }
-*/
+
   onCommentChange(text) {
     this.setState({ commentText: text })
   }
@@ -33,8 +28,8 @@ class CommentList extends React.Component {
     const { comment, post, user } = this.props
 
     return (
-      <div>
-        <div>Comments:</div>
+      <div className="comment-list">
+        <div className="comment-list-title">Comments:</div>
         {comment &&
           comment.postId === post.id &&
           comment.items.map((item) => <CommentView key={item.id} post={post} comment={item} />)}
@@ -50,7 +45,8 @@ class CommentList extends React.Component {
             />
           </div>
           <div>
-            <button className="button green"
+            <button
+              className="button green"
               disabled={!this.state.commentText || !user.isLogged}
               onClick={() => this.saveComment()}>
               Save comment

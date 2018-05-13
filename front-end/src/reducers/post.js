@@ -3,7 +3,8 @@ import {
   DELETE_POST,
   START_EDITING_POST,
   CANCEL_EDITING_POST,
-  RELOAD_POST
+  RELOAD_POST,
+  DELETE_COMMENT
 } from '../actions'
 
 const initialState = {
@@ -37,19 +38,18 @@ function post(state = initialState, action) {
         version: state.version + 1
       }
 
-    /*
-    case ADD_POST:
+    case DELETE_COMMENT:
+      const newPostListC = [...state.items]
+      for (let i = 0; i < newPostListC.length; i++) {
+        if (newPostListC[i].id === action.postId) {
+          newPostListC[i].commentCount = newPostListC[i].commentCount - 1
+        }
+      }
       return {
         ...state,
-        items: [...state.items, action.post],
-        version: state.version + 1
+        items: newPostListC
       }
-    /*
-    case EDIT_POST:
-      const posts = state.items.filter((item) => item.id !== action.post.id)
-      posts.push(action.post)
-      return { items: posts }
-*/
+
     case DELETE_POST:
       return {
         ...state,
@@ -70,8 +70,7 @@ function post(state = initialState, action) {
       return {
         ...state,
         items: newPostList,
-        postInEditing: null /*,
-        version: state.version + 1*/
+        postInEditing: null 
       }
 
     default:

@@ -16,7 +16,7 @@ class PostList extends React.Component {
 
   getPosts = () => {
     const { posts, filter } = this.props
-    let result = posts
+    let result = posts.filter((item) => !item.deleted)
     const category = this.props.match.params.category
     if (category) result = result.filter((item) => item.category === category)
 
@@ -24,6 +24,7 @@ class PostList extends React.Component {
       result = result.filter((item) => item.category === filter.category)
     if (filter.text)
       result = result.filter((item) => item.title.toLowerCase().includes(filter.text.toLowerCase()))
+
     result = Sort.sortPosts(result, filter.sortBy)
 
     return result
@@ -49,23 +50,23 @@ class PostList extends React.Component {
         <Filter category={this.props.match.params.category || 'All'} />
         {isReady && (
           <div>
-            <ul>
+            <ul className="post-list-ul">
               {this.getPosts().map((post) => (
-                <li key={post.id}>
+                <li className="post-list-item" key={post.id}>
                   <PostStub post={post} />
                 </li>
               ))}
             </ul>
             {user.isLogged && (
               <div className="button-group">
-                <button className="button green right" onClick={() => this.addPostClick()}>
+                <button className="button green" onClick={() => this.addPostClick()}>
                   Add New Post
                 </button>
               </div>
             )}
           </div>
         )}
-        {!isReady && <p> Loading...</p>}
+        {!isReady && <h1> Loading...</h1>}
       </div>
     )
   }

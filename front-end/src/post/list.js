@@ -2,8 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import PostStub from './stub'
+import Breadcrumb from '../breadcrumb'
 import Filter from '../filter'
 import Sort from '../utils/sort'
+import { startEditingPost } from '../actions'
 
 class PostList extends React.Component {
   PropTypes = {
@@ -20,17 +22,30 @@ class PostList extends React.Component {
 
     if (filter.category !== 'All')
       result = result.filter((item) => item.category === filter.category)
-    if (filter.text) result = result.filter((item) => item.title.includes(filter.text))
+    if (filter.text)
+      result = result.filter((item) => item.title.toLowerCase().includes(filter.text.toLowerCase()))
     result = Sort.sortPosts(result, filter.sortBy)
 
     return result
   }
 
+  addPostClick() {
+    const newPost = {
+      title: 'New Post',
+      body: '',
+      author: this.props.user.name,
+      timestamp: Date.now(),
+      category: this.props.match.params.category || ''
+    }
+    this.props.startEditingPost(newPost)
+  }
   render() {
-    const { isReady } = this.props
-    //console.log(new Date())
+    const { isReady, user } = this.props
+    const category = this.props.match.params.category || 'All'
     return (
       <div>
+        <Breadcrumb category={category} />
+
         <Filter category={this.props.match.params.category || 'All'} />
         {isReady && (
           <div>
@@ -41,7 +56,13 @@ class PostList extends React.Component {
                 </li>
               ))}
             </ul>
-            <button>Add post</button>
+            {user.isLogged && (
+              <div className="button-group">
+                <button className="button green right" onClick={() => this.addPostClick()}>
+                  Add New Post
+                </button>
+              </div>
+            )}
           </div>
         )}
         {!isReady && <p> Loading...</p>}
@@ -51,13 +72,19 @@ class PostList extends React.Component {
 }
 
 function mapStateToProps(state) {
-
   return {
     posts: state.post.items,
     isReady: state.post.isReady,
     filter: state.filter,
+    user: state.user,
     version: state.post.version
   }
 }
 
-export default connect(mapStateToProps)(PostList)
+function mapDispatchToProps(dispatch) {
+  return {
+    startEditingPost: (post) => dispatch(startEditingPost(post))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostList)

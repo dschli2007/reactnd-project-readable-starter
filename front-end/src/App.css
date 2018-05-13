@@ -12,12 +12,95 @@
   height: 100px;
   padding: 20px;
   color: white;
-
 }
 
-.App-title {
-  font-size: 1.5em;
+.link-title {
+  font-size: 2.5em;
   display: inline;
+  position: absolute;
+  margin: 17px 0px;
+  text-decoration: none;
+  color: cyan;
+}
+
+.login-form {
+  margin-left: 30px;
+}
+
+.field-group {
+  display: block;
+  margin-top: 5px;
+  margin-botton: 5px;
+}
+
+.field-label {
+  display: inline;
+}
+
+.field-input {
+  display: inline;
+  margin-left: 8px;
+  width: 70%;
+}
+
+.button-group {
+  margin: 10px 0px;
+  display: block;
+}
+
+.button-group-inline {
+  margin: 10px 10px;
+  display: inline;
+}
+
+.button {
+  margin-right: 10px;
+  display: inline;
+
+  border: none;
+  padding: 5px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0.80;
+}
+
+.button:hover:not([disabled]) {
+  opacity: 1;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+button[disabled] {
+  background-color: silver;
+  cursor: default;
+  opacity: 1;
+}
+
+.green {
+  color: white;
+  background-color: #4caf50;
+}
+
+.blue {
+  color: white;
+  background-color: #008cba;
+}
+
+.red {
+  color: white;
+  background-color: #f44336;
+}
+
+.black {
+  color: white;
+  background-color: #555555;
+}
+
+.yellow {
+  color: black;
+  background-color: yellow;
 }
 
 .App-intro {
@@ -28,7 +111,24 @@
   position: absolute;
   top: 0;
   right: 0;
-  margin:10px;
+  margin: 10px;
+}
+
+.page-content {
+  margin: 5px 15px;
+}
+
+.breadcrumb-panel {
+  display: block;
+  margin: 10px 0px;
+}
+
+.filter-container {
+  margin: 10px 0px;
+}
+
+.right{
+  float: right;
 }
 
 @keyframes App-logo-spin {

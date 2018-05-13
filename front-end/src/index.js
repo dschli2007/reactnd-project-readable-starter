@@ -6,7 +6,6 @@ import App from './App'
 import { Provider } from 'react-redux'
 import getStore from './store'
 import ServerAPI from './utils/ServerAPI'
-import ServerAPITest from './utils/ServerAPI.test'
 import { loadPosts, loadCategories } from './actions'
 
 const store = getStore()

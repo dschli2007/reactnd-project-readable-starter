@@ -33,28 +33,37 @@ class LoginModal extends React.Component {
 
   render() {
     return (
-      <Modal isOpen={this.props.isOpen} contentLabel="Login information" ariaHideApp={false}>
-        <form>
-          <div>
-            User name:{' '}
-            <input
-              className="user-name-input"
-              type="text"
-              name="name"
-              value={this.state.userInput}
-              onChange={(e) => this.userInputChange(e.target.value)}
-            />
-          </div>
-          <button
-            className="login-confirm-button"
-            onClick={(e) => this.loginClick(e)}
-            disabled={!this.state.userInput}>
-            Enter
-          </button>
-          <button className="login-cancel-button" onClick={(e) => this.cancelClick(e)}>
-            Cancel
-          </button>
-        </form>
+      <Modal isOpen={this.props.isOpen}
+        contentLabel="Login information"
+        ariaHideApp={false}
+        style={{content: {bottom:'auto'}}}
+        >
+        <div className="login-form">
+          <h1>Login</h1>
+          <form>
+            <div className="field-group">
+              <div className="field-label">User name:</div>
+              <input
+                className="field-input"
+                type="text"
+                name="name"
+                value={this.state.userInput}
+                onChange={(e) => this.userInputChange(e.target.value)}
+              />
+            </div>
+            <div className="button-group">
+              <button
+                className="button green"
+                onClick={(e) => this.loginClick(e)}
+                disabled={!this.state.userInput}>
+                Enter
+              </button>
+              <button className="button black" onClick={(e) => this.cancelClick(e)}>
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
       </Modal>
     )
   }

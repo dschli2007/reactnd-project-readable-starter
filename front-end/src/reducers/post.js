@@ -1,4 +1,10 @@
-import { LOAD_POSTS, ADD_POST, DELETE_POST, START_EDITING_POST, VOTE_POST, RELOAD_POST } from '../actions'
+import {
+  LOAD_POSTS,
+  DELETE_POST,
+  START_EDITING_POST,
+  CANCEL_EDITING_POST,
+  RELOAD_POST
+} from '../actions'
 
 const initialState = {
   items: [],
@@ -24,6 +30,14 @@ function post(state = initialState, action) {
         version: state.version + 1
       }
 
+    case CANCEL_EDITING_POST:
+      return {
+        ...state,
+        postInEditing: null,
+        version: state.version + 1
+      }
+
+    /*
     case ADD_POST:
       return {
         ...state,
@@ -44,14 +58,20 @@ function post(state = initialState, action) {
       }
 
     case RELOAD_POST:
-      const newPostList = state.items
+      const newPostList = [...state.items]
+      let reloaded = false
       for (let i = 0; i < newPostList.length; i++) {
-        if (newPostList[i].id === action.post.id) newPostList[i] = action.post
+        if (newPostList[i].id === action.post.id) {
+          newPostList[i] = action.post
+          reloaded = true
+        }
       }
+      if (!reloaded) newPostList.push(action.post)
       return {
         ...state,
         items: newPostList,
-        version: state.version + 1
+        postInEditing: null /*,
+        version: state.version + 1*/
       }
 
     default:

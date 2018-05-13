@@ -24,31 +24,42 @@ class Filter extends React.Component {
 
     return (
       <div className="filter-container">
-        <input
-          type="text"
-          name="TxtFilter"
-          onChange={(e) => this.handleChangeText(e.target.value)}
-          value={this.props.text}
-        />
-        <div>
-          Category:
-          {categories &&
-            categories.map((item) => (
-              <Link key={item} to={'/' + (item === 'All' ? '' : item)}>
-                <button disabled={category === item}>{item}</button>
-              </Link>
-            ))}
+        <div className="field-group">
+          <div className="field-label">Filter by:</div>
+          <input
+            className="field-input"
+            type="text"
+            name="TxtFilter"
+            onChange={(e) => this.handleChangeText(e.target.value)}
+            value={this.props.text}
+          />
         </div>
-        <div>
-          Sort by:
-          {Sort.types.map((item) => (
-            <button
-              key={item.id}
-              disabled={sortBy === item.id}
-              onClick={() => this.handleClickSort(item.id)}>
-              {item.name}
-            </button>
-          ))}
+        <div className="field-group">
+          <div className="field-label">Category:</div>
+          <div className="button-group-inline">
+            {categories &&
+              categories.map((item) => (
+                <Link key={item} to={'/' + (item === 'All' ? '' : item)}>
+                  <button className="button green" disabled={category === item}>
+                    {item}
+                  </button>
+                </Link>
+              ))}
+          </div>
+        </div>
+        <div className="field-group">
+          <div className="field-label">Sort by:</div>
+          <div className="button-group-inline">
+            {Sort.types.map((item) => (
+              <button
+                className="button blue"
+                key={item.id}
+                disabled={sortBy === item.id}
+                onClick={() => this.handleClickSort(item.id)}>
+                {item.name}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     )

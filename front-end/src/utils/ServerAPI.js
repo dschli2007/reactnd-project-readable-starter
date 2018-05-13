@@ -10,6 +10,14 @@ function ServerAPI(url = 'http://localhost:3001') {
       })
     },
 
+    getPost: (id) => {
+      const targetUrl = `${url}/posts/${id}`
+      return fetch(targetUrl, {
+        headers: { Authorization: 'readable-cli' },
+        method: 'GET'
+      })
+    },
+
     getCategories() {
       const targetUrl = `${url}/categories`
       return fetch(targetUrl, {
@@ -26,23 +34,73 @@ function ServerAPI(url = 'http://localhost:3001') {
       })
     },
 
-    addPost(post) {
-      const targetUrl = `${url}/posts`
+    addComment(comment) {
+      const targetUrl = `${url}/comments`
+      return fetch(targetUrl, {
+        headers: { Authorization: 'readable-cli', 'Content-Type': 'application/json' },
+        method: 'POST',
+        body: JSON.stringify(comment)
+      })
+    },
+
+    deleteComment(id) {
+      const targetUrl = `${url}/comments/${id}`
       return fetch(targetUrl, {
         headers: { Authorization: 'readable-cli' },
+        method: 'DELETE'
+      })
+    },
+
+    updateComment(comment) {
+      const targetUrl = `${url}/comments/${comment.id}`
+      return fetch(targetUrl, {
+        headers: { Authorization: 'readable-cli', 'Content-Type': 'application/json' },
+        method: 'PUT',
+        body: JSON.stringify(comment)
+      })
+    },
+
+    voteComment(id, option) {
+      const targetUrl = `${url}/comments/${id}`
+      return fetch(targetUrl, {
+        headers: { Authorization: 'readable-cli', 'Content-Type': 'application/json' },
         method: 'POST',
-        data: post
+        body: JSON.stringify({ option })
       })
     },
 
     votePost(id, value) {
-      console.log(value + ' to ' + id)
-
       const targetUrl = `${url}/posts/${id}`
       return fetch(targetUrl, {
         headers: { Authorization: 'readable-cli', 'Content-Type': 'application/json' },
-        method: 'post',
+        method: 'POST',
         body: JSON.stringify({ option: value })
+      })
+    },
+
+    addPost(post) {
+      const targetUrl = `${url}/posts`
+      return fetch(targetUrl, {
+        headers: { Authorization: 'readable-cli', 'Content-Type': 'application/json' },
+        method: 'POST',
+        body: JSON.stringify(post)
+      })
+    },
+
+    updatePost(post) {
+      const targetUrl = `${url}/posts/${post.id}`
+      return fetch(targetUrl, {
+        headers: { Authorization: 'readable-cli', 'Content-Type': 'application/json' },
+        method: 'PUT',
+        body: JSON.stringify(post)
+      })
+    },
+
+    deletePost(id) {
+      const targetUrl = `${url}/posts/${id}`
+      return fetch(targetUrl, {
+        headers: { Authorization: 'readable-cli', 'Content-Type': 'application/json' },
+        method: 'DELETE'
       })
     }
 

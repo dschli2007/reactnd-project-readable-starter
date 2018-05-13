@@ -34,7 +34,7 @@ class Login extends React.Component {
       return (
         <div className="login-container">
           Welcome {name},{' '}
-          <button className="login-button" onClick={() => this.logoutClick()}>
+          <button className="button blue" onClick={() => this.logoutClick()}>
             Logout
           </button>
         </div>
@@ -44,7 +44,7 @@ class Login extends React.Component {
     return (
       <div className="login-container">
         Please{' '}
-        <button className="login-button" onClick={() => this.setModalState(true)}>
+        <button className="button green" onClick={() => this.setModalState(true)}>
           login
         </button>
         <LoginModal isOpen={this.state.showModalLogin}

@@ -13,15 +13,17 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <Link to="/">
-            <h1 className="App-title">Readable</h1>
+          <Link to="/" className="link-title">
+            <div className="App-title">Readable</div>
           </Link>
           <Login />
         </header>
-        <PostEditor />
-        <Route exact path="/" component={PostList} />
-        <Route exact path="/:category" component={PostList} />
-        <Route path="/:category/:id" component={PostSelector} />
+        <div className="page-content">
+          <PostEditor />
+          <Route exact path="/" component={PostList} />
+          <Route exact path="/:category" component={PostList} />
+          <Route path="/:category/:id" component={PostSelector} />
+        </div>
       </div>
     )
   }

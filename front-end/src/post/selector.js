@@ -8,7 +8,12 @@ function PostSelector(props) {
   if (post) {
     return <PostView post={post} />
   }
-  return <p>Sorry! It seems the post you are looking for has been deleted!</p>
+  return (
+    <div>
+      <h3>404 page not found</h3>
+      <p>We are sorry but the page you are looking for does not exist.</p>
+    </div>
+  )
 }
 
 function mapStateToProps(state) {

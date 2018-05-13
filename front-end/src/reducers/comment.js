@@ -1,7 +1,7 @@
-import { LOAD_COMMENTS} from '../actions'
+import { LOAD_COMMENTS, ADD_COMMENT, UPDATE_COMMENT, DELETE_COMMENT } from '../actions'
 const initialState = {
   items: [],
-  isReady: false
+  postId: ''
 }
 
 function comment(state = initialState, action) {
@@ -10,26 +10,32 @@ function comment(state = initialState, action) {
       return {
         ...state,
         items: action.items,
-        isReady: true
-      }
-/*
-    case ADD_POST:
-      return {
-        ...state,
-        items: [...state.items, action.post]
+        postId: action.postId
       }
 
-    case EDIT_POST:
-      const posts = state.items.filter((item) => item.id !== action.post.id)
-      posts.push(action.post)
-      return { items: posts }
-
-    case REMOVE_POST:
+    case ADD_COMMENT:
       return {
         ...state,
-        items: state.items.filter((f) => f.id !== action.id)
+        items: [...state.items, action.comment]
       }
-*/
+
+    case UPDATE_COMMENT:
+      const listToUpdate = [...state.items]
+      for (var i = 0; i < listToUpdate.length; i++) {
+        if (listToUpdate[i].id === action.comment.id) listToUpdate[i] = action.comment
+      }
+      return {
+        ...state,
+        items: listToUpdate
+      }
+
+    case DELETE_COMMENT:
+      const newList = state.items.filter((x) => x.id !== action.id)
+      return {
+        ...state,
+        items: newList
+      }
+
     default:
       return state
   }

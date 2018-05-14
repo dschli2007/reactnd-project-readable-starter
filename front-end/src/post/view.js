@@ -50,11 +50,4 @@ function mapStateToProps({ comment, user, post }) {
   return { comment, user }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    //loadCommentsForPost: (post) => dispatch(loadCommentsForPost(post.id)),
-    //addComment: (id, postId, body, author) => dispatch(addComment({ id, postId, body, author }))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PostView)
+export default connect(mapStateToProps)(PostView)
